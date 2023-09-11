@@ -7,13 +7,23 @@ from tkinter import messagebox
 app = ctt.CTk()
 
 app.title("DR - System")
-app.geometry("700x500")
 app.resizable(width=False, height=False)
 img = PhotoImage(file="img/icon-semfundo.png")
 
 #  Variables ---------------------------------------------------------------------------------------------
+largura = 700
+altura = 500
+
 font_label = ('arial', 20)
 font_entry = ('arial', 15)
+
+screen_height = app.winfo_screenheight()
+screen_width = app.winfo_screenwidth()
+
+pos_x = screen_width / 2 - largura / 2 
+pos_y = screen_height / 2 - altura / 2 
+
+app.geometry("%dx%d+%d+%d" %(largura, altura, pos_x, pos_y))
 
 #  Functions ---------------------------------------------------------------------------------------------
 def Register():
@@ -232,5 +242,7 @@ btnES = ctt.CTkButton(
     hover_color='#3A3939', command=trocasenha
 )
 btnES.place(x=130, y=400)
+
+print(screen_height, screen_width)
 
 app.mainloop()

@@ -3,6 +3,7 @@ import customtkinter as ctt
 from tkinter import * 
 from tkinter import messagebox
 
+
 app = ctt.CTk()
 
 app.title("DR - System")
@@ -20,13 +21,22 @@ def Register():
     nome = UserCadEntry.get()
     senha = SenhaCadEntry.get()
 
-    if(nome == '' or senha == '' or email == ''):
-        messagebox.showerror(title='DR - System', message='Campos obrigatorios')
+    if not nome or not senha or not email:
+        messagebox.showerror(title='DR - System', message='Campos obrigatórios')
     else:
-        database.mycursor.execute(
-            """INSERT INTO usuario VALUES(DEFAULT, %s, %s, %s)""",(nome, senha, email)
-        )
-        messagebox.showinfo(title='DR - System', message='Cadastrado com sucesso')
+        # Verifica se o email já está registrado
+        database.mycursor.execute("""SELECT email FROM usuario WHERE email = %s""", (email,))
+        result = database.mycursor.fetchone()
+        
+        if not result:
+            # Email não está registrado, então podemos inserir o novo usuário
+            database.mycursor.execute(
+                """INSERT INTO usuario VALUES(DEFAULT, %s, %s, %s)""", (nome, senha, email)
+            )
+            messagebox.showinfo(title='DR - System', message='Cadastrado com sucesso')
+        else:
+            # Email já está registrado
+            messagebox.showerror(title='DR - System', message='Email já registrado')
 
 #Label - Recuperar senha
 def trocasenha():
@@ -79,7 +89,9 @@ ButtonViews = ctt.CTkTabview(
     fg_color='#3A3939',
     text_color="black", 
     segmented_button_fg_color="white", 
-    segmented_button_unselected_color="white"
+    segmented_button_unselected_color="white",
+    segmented_button_unselected_hover_color="#2B92F0",
+    segmented_button_selected_color="#2B92F0"
 )
 ButtonViews.place(x=0, y=0)
 

@@ -45,15 +45,24 @@ class Application:
         )
         self.FrameDados.place(x=300, y=0)
 
+        frame_width = 300
+        frame_height = 500
+
+        img_width = 250
+        img_height = 250
+
+        x = (frame_width - img_width) / 2
+        y = (frame_height - img_height) / 2
+
         self.ImgLabel = Label(self.frameIcon, image=self.img, bg='#252222')
-        self.ImgLabel.place(x=50, y=180)
+        self.ImgLabel.place(x=x, y=y)
 
         self.ButtonViews = ctt.CTkTabview(
             self.FrameDados,
             width=400,
             height=500,
             fg_color='#3A3939',
-            text_color="black", 
+            text_color="black",
             segmented_button_fg_color="white", 
             segmented_button_unselected_color="white",
             segmented_button_unselected_hover_color="#2B92F0",
@@ -117,7 +126,7 @@ class Application:
             text='Entrar', 
             bg_color='#3A3939', 
             text_color='white',
-            command=lambda: CadastroBanco.EntrarUser(self.setup_app, self.UserEntry.get(), self.SenhaEntry.get())  # Corrección aquí
+            command=lambda: CadastroBanco.EntrarUser(self.UserEntry.get(), self.SenhaEntry.get())  # Corrección aquí
         )
         self.BtnEntrar.place(x=150, y=330)
 
@@ -194,7 +203,7 @@ class Application:
             bg_color='#3A3939', 
             text_color='white', 
             fg_color='#2B92F0',
-            command=lambda: CadastroBanco.Register(self.EmailEntry.get(), self.UserCadEntry.get(), self.UserCadEntry.get())
+            command=lambda: CadastroBanco.Register(self.EmailEntry.get(), self.UserCadEntry.get(), self.SenhaCadEntry.get())
         )
         self.BtnCad.place(x=150, y=330)
 

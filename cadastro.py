@@ -26,7 +26,7 @@ class CadastroBanco:
             NovaTab = ctt.CTkTabview(teste.FrameDados, width=500, height=250)
             NovaTab.pack()
 
-        def EntrarUser(self,nome:str, senha:str):
+        def EntrarUser(nome:str, senha:str):
 
             database.mycursor.execute(
                 """SELECT nome, senha FROM usuario WHERE nome = %s AND senha = %s;""",(nome, senha)
@@ -36,6 +36,5 @@ class CadastroBanco:
             if vereficador:
                 messagebox.showinfo(title='DR - system', message='BEM-VINDO')
                 print('entrou')
-                self.app.iconify()
             else:
                 messagebox.showerror(title='DR - system', message='senha ou usuário incorreto')    

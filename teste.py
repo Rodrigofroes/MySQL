@@ -25,6 +25,8 @@ pos_y = screen_height / 2 - altura / 2
 app.geometry("%dx%d+%d+%d" %(largura, altura, pos_x, pos_y))
 
 
+
+
 #  Page  ---------------------------------------------------------------------------------------------
 #Posicionamento de frames
 frameIcon = ctt.CTkFrame(
@@ -42,8 +44,18 @@ FrameDados = ctt.CTkFrame(
 FrameDados.place(x=300, y=0)
 
 #Posicionamento da img
+frame_width = 300
+frame_height = 500
+
+img_width = 250
+img_height = 250
+
+x = (frame_width - img_width) / 2
+y = (frame_height - img_height) / 2
+
 ImgLabel = Label(frameIcon, image=img, bg='#252222')
-ImgLabel.place(x=50, y=180)
+ImgLabel.place(x=x, y=y)
+
 
 #Tabs Login e cadastro
 ButtonViews = ctt.CTkTabview(

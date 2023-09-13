@@ -1,7 +1,6 @@
-import database
 import customtkinter as ctt
-from tkinter import * 
-from tkinter import messagebox
+from tkinter import *
+from cadastro import CadastroBanco 
 
 
 app = ctt.CTk()
@@ -24,51 +23,6 @@ pos_x = screen_width / 2 - largura / 2
 pos_y = screen_height / 2 - altura / 2 
 
 app.geometry("%dx%d+%d+%d" %(largura, altura, pos_x, pos_y))
-
-#  Functions ---------------------------------------------------------------------------------------------
-def Register():
-    email = EmailEntry.get()
-    nome = UserCadEntry.get()
-    senha = SenhaCadEntry.get()
-
-    if not nome or not senha or not email:
-        messagebox.showerror(title='DR - System', message='Campos obrigatórios')
-    else:
-        # Verifica se o email já está registrado
-        database.mycursor.execute("""SELECT email FROM usuario WHERE email = %s""", (email,))
-        result = database.mycursor.fetchone()
-        
-        if not result:
-            # Email não está registrado, então podemos inserir o novo usuário
-            database.mycursor.execute(
-                """INSERT INTO usuario VALUES(DEFAULT, %s, %s, %s)""", (nome, senha, email)
-            )
-            messagebox.showinfo(title='DR - System', message='Cadastrado com sucesso')
-        else:
-            # Email já está registrado
-            messagebox.showerror(title='DR - System', message='Email já registrado')
-
-#Label - Recuperar senha
-def trocasenha():
-    NovaTab = ctt.CTkTabview(FrameDados, width=500, height=250)
-    NovaTab.pack()
-
-
-def EntrarUser():
-    nome = UserEntry.get()
-    senha = SenhaEntry.get() 
-
-    database.mycursor.execute(
-        """SELECT nome, senha FROM usuario WHERE nome = %s AND senha = %s;""",(nome, senha)
-    )
-    vereficador = database.mycursor.fetchone()
-
-    if vereficador:
-        messagebox.showinfo(title='DR - system', message='BEM-VINDO')
-        print('entrou')
-        app.iconify()
-    else:
-        messagebox.showerror(title='DR - system', message='senha ou usuário incorreto')    
 
 
 #  Page  ---------------------------------------------------------------------------------------------
@@ -218,7 +172,7 @@ BtnCad = ctt.CTkButton(
     text='Cadastrar', 
     bg_color='#3A3939', 
     text_color='white', 
-    fg_color='#2B92F0', command=Register
+    fg_color='#2B92F0', command=lambda: CadastroBanco.Register(EmailEntry.get(), UserCadEntry.get(), UserCadEntry.get())
 )
 BtnCad.place(x=150, y=330)
 
@@ -230,7 +184,7 @@ BtnEntrar = ctt.CTkButton(
     text='Entrar', 
     bg_color='#3A3939', 
     text_color='white', 
-    fg_color='#2B92F0', command=EntrarUser
+    fg_color='#2B92F0', command=lambda: CadastroBanco.EntrarUser(app, UserEntry.get(), SenhaEntry.get())
 )
 BtnEntrar.place(x=150, y=330)
 
@@ -239,7 +193,7 @@ btnES = ctt.CTkButton(
     text='Esqueceu sua senha?', 
     text_color='#F8774E', 
     fg_color='#3A3939',
-    hover_color='#3A3939', command=trocasenha
+    hover_color='#3A3939'
 )
 btnES.place(x=130, y=400)
 

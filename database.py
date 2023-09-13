@@ -25,7 +25,7 @@ mycursor.execute ( """
 """
 )
 
-mycursor.execute("""SELECT nome, senha, email FROM usuario ORDER BY nome""")
+mycursor.execute("""SELECT id, nome, senha, email FROM usuario ORDER BY nome""")
 
 result = mycursor.fetchall()
 

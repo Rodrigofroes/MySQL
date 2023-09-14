@@ -32,14 +32,16 @@ class Application:
 
     def setup_frames(self):
         self.frameIcon = ctt.CTkFrame(
-            self.master, width=300, 
+            self.master, 
+            width=300, 
             height=500, 
             fg_color='#252222'
         )
         self.frameIcon.place(x=0 , y=0)
 
         self.FrameDados = ctt.CTkFrame(
-            self.master, width=400, 
+            self.master, 
+            width=400, 
             height=500, 
             fg_color='#3A3939'
         )

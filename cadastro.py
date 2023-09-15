@@ -1,4 +1,7 @@
+from msilib.schema import SelfReg
 from tkinter import messagebox
+import customtkinter
+from typing import Self
 import database
 class CadastroBanco:
         #  Functions ---------------------------------------------------------------------------------------------

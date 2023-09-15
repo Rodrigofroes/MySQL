@@ -30,6 +30,8 @@ class Application:
         self.setup_login_tab()
         self.setup_register_tab()
 
+
+
     def setup_frames(self):
         self.frameIcon = ctt.CTkFrame(
             self.master, 
@@ -137,7 +139,8 @@ class Application:
             text='Esqueceu sua senha?', 
             text_color='#F8774E', 
             fg_color='#3A3939',
-            hover_color='#3A3939'
+            hover_color='#3A3939',
+            command=lambda: CadastroBanco.trocasenha(self)
         )
         self.btnES.place(x=130, y=400)
 
@@ -208,6 +211,8 @@ class Application:
             command=lambda: CadastroBanco.Register(self.EmailEntry.get(), self.UserCadEntry.get(), self.SenhaCadEntry.get())
         )
         self.BtnCad.place(x=150, y=330)
+
+
 
 if __name__ == "__main__":
     app = ctt.CTk()

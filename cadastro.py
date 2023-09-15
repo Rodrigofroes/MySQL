@@ -83,6 +83,7 @@ class CadastroBanco:
                         height=40, 
                         fg_color='white', 
                         text_color='black',
+                        show='*',
                         font=ctt.CTkFont(family='arial', size=13)
                     )
                     NVsenhaEntry.place(x=145, y=195)
@@ -100,7 +101,7 @@ class CadastroBanco:
                                 messagebox.showinfo(title='DR - System', message='Senha trocada com sucesso')
                                 nova_janela.iconify()
                             else:
-                                messagebox.showerror(title='DR - System', message='Erro ao trocar a senha')
+                                messagebox.showerror(title='DR - System', message='Email incorreto')
 
                     buttonVeri = ctt.CTkButton(
                         nova_janela,
